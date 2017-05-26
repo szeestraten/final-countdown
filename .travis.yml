@@ -13,9 +13,6 @@ before_install:
 install:
  - pip install html5validator
 
-before_script:
-  - npm install -g firebase-tools
-
 script: html5validator --root public/
 
 deploy:
