@@ -19,6 +19,8 @@ deploy:
   provider: firebase
   token:
     secure: "JylnfkycSxaC7yqsEoUcb0gqgRUDWzY49RdolBRH3PJIT5CbWbcFCRyNfU8fl21QFhl6l5VxWgiMPkIA/J6EYxnqllmnJyYsBe/VK9H3ntIsFQV5KmUzfccPCZLY8EK94AiQ2K8po2bjXK5iBuf46ePoLMxY16hND8mRAQ2smKN99/KkMG66xTqcgNQ9U1cyQPGjuge+QXuP4AtirD0/G3YPIzTUgLisWWX8spE9x5Mlf4Yoz+n/UyP/vATr6EucbtmJVOQXYeDrIl++/2T0HAGWhWmhbp2EWE2w9Tlsrfz7usjsMRE+ZL4gY/L85xyX2pFt066lgBYx02i0IcmTlNaHtIEvhmK3m3/vouJrgwr2XMoE+GcYKwQXnSi7hQpbJe9OvLHfjUDdqFLBp3dkfJaB1apOac8BuWktJ5lnBowZ0FQTdgTNv/m3mRDDrh+7f2VPmsDX5idV9ENiCCyl0C07gBYMtOTdbmMKa2eIGkfmNP9i13H1PXlltHUI92JfmKVWHhb+XAc/ADervmBHMjuS/a+Ho1duFvUd8lOGw6OHcsXf2EN+gHHrmUcroDFkm7xq+Squmie/LE/slg+H2HNED1gP4njPyQeOcYo8uprGisr+npGm1C9500uBN+O8qrvsl5/4PIr22JfSnrrFeUAk91oPTxn61xR/FURd7tA="
+  on:
+    branch: master
 
 notifications:
   email: false
