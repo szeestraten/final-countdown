@@ -1,0 +1,82 @@
+/* Base structure */
+html,
+body {
+  height: 100%;
+}
+body {
+  color: #333;
+  text-align: center;
+}
+
+/* Cover */
+.cover {
+  padding: 0 20px;
+}
+.cover .btn-lg {
+  padding: 7.5px 20px;
+  font-weight: bold;
+}
+.cover h1 {
+  font-size: 3.5em;
+  font-weight: bold;
+}
+
+/* Footer */
+.footer {
+}
+
+/* Other */
+.inner {
+  padding: 30px;
+}
+
+.lead {
+  color: #777;
+}
+
+#alarm {
+  text-align: right;
+  font-size: 2em;
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.15);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.15);
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .footer {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Handle the widths */
+  .footer,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 992px) {
+  .footer,
+  .cover-container {
+    width: 700px;
+  }
+}

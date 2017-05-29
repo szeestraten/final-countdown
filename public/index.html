@@ -2,12 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <!-- Get bootstrap -->
+    <!-- Get bootstrap stylesheet -->
     <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
-    <title>final-countdown</title>
+    <!-- Get custom stylesheet -->
+    <link rel="stylesheet" href="final-countdown.css">
+
+    <title>Meeting countdown timer</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script src="/dist/build.js"></script>
+
+  <div class="site-wrapper">
+    <div class="site-wrapper-inner">
+      <div class="cover-container">
+
+        <div class="cover inner">
+          <!-- Vue controlled div -->
+          <div id="app"></div>
+        </div>
+
+        <div class="footer inner">
+          <p>Created with <a href="https://vuejs.org">Vue.js</a>, by <a href="https://github.com/szeestraten/">@szeestraten</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <!-- Webpack compiled JS -->
+  <script src="/dist/build.js"></script>
   </body>
 </html>
