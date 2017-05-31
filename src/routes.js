@@ -1,7 +1,13 @@
 import Home from './components/Home.vue';
-import Alarm from './components/Alarm.vue';
+
+// Lazy load alarm page
+const Timer = resolve => {
+    require.ensure(['./components/Timer.vue'], () => {
+        resolve(require('./components/Timer.vue'))
+    })
+}
 
 export const routes = [
     { path: '/', component: Home },
-    { path: '/alarm', component: Alarm }
+    { path: '/timer', component: Timer }
 ];

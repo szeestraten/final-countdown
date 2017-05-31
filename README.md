@@ -11,12 +11,12 @@
 # Install dependencies
 npm install
 
-# Serve with hot reload at localhost:8080
+# Serve development build at http://localhost:8080
 npm run dev
 
-# Build for production with minification
-npm run build
+# Serve production build with Firebase serve at http://localhost:5000
+npm run serve
 
-# Deploy production build with Firebase
+# Manual production deployment to Firebase
 npm run deploy
 ```
