@@ -4,7 +4,7 @@
 > Time management can be hard. Keep your meetings efficient with a timer.
 
 ## Demo
-[https://countdown.zeestrataca.com](https://countdown.zeestrataca.com)
+[https://timer.zeestrataca.com](https://timer.zeestrataca.com)
 
 ## Build Setup
 ``` bash
