@@ -20,7 +20,7 @@
       </div>  
 
       <!-- Display progress bar -->
-      <div class="progress progress-striped active" id="timerBar" v-else key="timerBar">
+      <div class="progress progress-striped" :class="{ active: !timerPaused }" id="timerBar" v-else key="timerBar">
         <div class="progress-bar progress-bar-info" :style="{ width: calculateProgress }"></div>
       </div>
     </transition>
