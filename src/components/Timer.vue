@@ -26,8 +26,7 @@
     </transition>
 
     <div>
-      <button class="btn btn-lg btn-success" :disabled="timerActive && !timerPaused" @click="startTimer">Start</button>
-      <button class="btn btn-lg btn-warning" :disabled="!timerActive || timerPaused || timerFinished" @click="pauseTimer">Pause</button>
+      <button class="btn btn-lg" :class="toggleTimerClass" @click="toggleTimer">{{ toggleTimerText }}</button>
       <button class="btn btn-lg btn-danger" :disabled="!timerActive" @click="resetTimer">Reset</button>
     </div>
 
@@ -68,10 +67,26 @@ export default {
     },
     calculateProgress: function () {
       return numeral(this.getTimeInSeconds() / this.timerDuration).format('0%');
+    },
+    toggleTimerText: function() {
+      return !(this.timerActive || this.timerPaused) 
+        ? 'Start' : this.timerPaused ? 'Resume' : 'Pause';
+    },
+    toggleTimerClass: function() {
+      return !(this.timerActive || this.timerPaused) 
+        ? 'btn-success' : this.timerPaused ? 'btn-warning' : 'btn-info';
     }
+
   },
   methods: {
     resetInput: function () {
+    },
+    toggleTimer: function() {
+      if(this.timerPaused || !this.timerActive) {
+        this.startTimer();
+      } else {
+        this.pauseTimer();
+      }
     },
     startTimer: function () {
       if (this.timerPaused) {
