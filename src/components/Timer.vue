@@ -49,15 +49,15 @@ export default {
       timerFinished: false,
       timerSelected: '15:00',
       options: [
-        { text: '5m 00s', value: '5:00'},
-        { text: '10m 00s', value: '10:00'},
-        { text: '15m 00s', value: '15:00'},
-        { text: '20m 00s', value: '20:00'},
-        { text: '25m 00s', value: '25:00'},
-        { text: '30m 00s', value: '30:00'},
-        { text: '35m 00s', value: '35:00'},
-        { text: '40m 00s', value: '40:00'},
-        { text: '45m 00s', value: '45:00'}
+        { text: '5ms', value: '5:00'},
+        { text: '10m', value: '10:00'},
+        { text: '15m', value: '15:00'},
+        { text: '20m', value: '20:00'},
+        { text: '25m', value: '25:00'},
+        { text: '30m', value: '30:00'},
+        { text: '35m', value: '35:00'},
+        { text: '40m', value: '40:00'},
+        { text: '45m', value: '45:00'}
       ]
     }
   },
