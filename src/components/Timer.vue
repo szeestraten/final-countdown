@@ -49,7 +49,7 @@ export default {
       timerFinished: false,
       timerSelected: '15:00',
       options: [
-        { text: '5ms', value: '5:00'},
+        { text: '5m', value: '5:00'},
         { text: '10m', value: '10:00'},
         { text: '15m', value: '15:00'},
         { text: '20m', value: '20:00'},
