@@ -69,6 +69,10 @@ h1 {
   opacity: 0.3;
 }
 
+.btn:active, .btn:focus, .btn:hover {
+   outline: none !important;
+}
+
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
