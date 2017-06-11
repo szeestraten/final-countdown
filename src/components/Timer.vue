@@ -52,6 +52,7 @@ export default {
       },
 
       // other variables
+      sleepVideo: null,
       timerObject: null,
       timerSound: null,
       timerDuration: 0,
@@ -91,8 +92,6 @@ export default {
 
   },
   methods: {
-    resetInput: function () {
-    },
     toggleTimer: function() {
       if(this.timerPaused || !this.timerActive) {
         this.startTimer();
@@ -101,10 +100,14 @@ export default {
       }
     },
     startTimer: function () {
+      // Resume timer if paused
       if (this.timerPaused) {
         // Start paused timer
         this.timerPaused = false;
         this.timerObject.start()
+        this.preventSleep();
+
+      // If not paused, setup new timer
       } else {
         // Get the selected duration
         this.timerDuration = numeral(this.timerSelected).value();
@@ -122,18 +125,28 @@ export default {
         // Start the clock
         this.timerObject.start();
         this.timerActive = true;
+      
+        // Prevent sleep when counting down
+        this.preventSleep();
       }
     },
     pauseTimer: function () {
       this.timerPaused = true;
       this.timerObject.stop();
+
+      // Disable sleep prevention
+      this.allowSleep();
     },
     resetTimer: function () {
+      // Reset timers and variables
       this.timerActive = false;
       this.timerPaused = false;
       this.timerFinished = false;
       this.timerObject.stop();
       this.timerObject = null;
+
+      // Disable sleep prevention
+      this.allowSleep();
     },
 
     // Helper functions
@@ -143,7 +156,41 @@ export default {
     getTimeInMilliseconds: function () {
       return Math.round(this.timerObject.ms);
     },
+    
+    // Avoid sleep hack when timer is active
+    preventSleep: function() {
+      if (!this.sleepVideo) this._initSleepPrevention();
+      this.sleepVideo.setAttribute('loop', 'loop');
+      this.sleepVideo.play();
+    },
+    allowSleep: function() {
+      if (!this.sleepVideo) this._initSleepPrevention();
+      this.sleepVideo.removeAttribute('loop');
+      this.sleepVideo.pause();
+    },
+    _initSleepPrevention: function() {
+      // Setup video element
+      this.sleepVideo = window.document.createElement('video');
+      this.sleepVideo.setAttribute('width', '10');
+      this.sleepVideo.setAttribute('height', '10');
+      this.sleepVideo.style.position = 'absolute';
+      this.sleepVideo.style.top = '-10px';
+      this.sleepVideo.style.left = '-10px';
 
+      // Create video source elements
+      var source_mp4 = window.document.createElement('source');
+      source_mp4.setAttribute('src', 'assets/media/muted-blank.mp4');
+      source_mp4.setAttribute('type', 'video/mp4');
+      this.sleepVideo.appendChild(source_mp4);
+
+      var source_ogg = window.document.createElement('source');
+      source_ogg.setAttribute('src', 'assets/media/muted-blank.ogv');
+      source_ogg.setAttribute('type', 'video/ogg');
+      this.sleepVideo.appendChild(source_ogg);
+
+      // Add elements to DOM
+      window.document.body.appendChild(this.sleepVideo);
+    },
   },
   mounted: function () {
     // Load audio for alarm sound
