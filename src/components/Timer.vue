@@ -43,6 +43,7 @@ export default {
   data: function () {
     return {
       timerObject: null,
+      timerSound: null,
       timerDuration: 0,
       timerActive: false,
       timerPaused: false,
@@ -58,7 +59,8 @@ export default {
         { text: '35m', value: '35:00'},
         { text: '40m', value: '40:00'},
         { text: '45m', value: '45:00'}
-      ]
+      ],
+
     }
   },
   computed: {
@@ -75,7 +77,7 @@ export default {
     toggleTimerClass: function() {
       return !(this.timerActive || this.timerPaused) 
         ? 'btn-success' : this.timerPaused ? 'btn-warning' : 'btn-info';
-    }
+    },
 
   },
   methods: {
@@ -104,6 +106,7 @@ export default {
         // Call when done
         this.timerObject.onDone(function() {
           self.timerFinished = true;
+          self.timerSound.play();
         });
 
         // Start the clock
@@ -130,6 +133,12 @@ export default {
     getTimeInMilliseconds: function () {
       return Math.round(this.timerObject.ms);
     },
-  }
+
+  },
+  mounted: function () {
+    // Load audio for alarm sound
+    this.timerSound = new Audio('assets/media/bell.mp3');
+    this.timerSound.volume = 0.3;
+  },
 }
 </script>
