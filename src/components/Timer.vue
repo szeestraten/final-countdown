@@ -2,7 +2,7 @@
   <div>
     <transition name="fade" mode="out-in">
       <!-- Display title-->
-      <h1 v-if="!timerActive" key="title">Set a timer</h1>
+      <h1 v-if="!timerActive" key="title">{{ timerTitleText }}</h1>
 
       <!-- Display timer -->
       <h1 :class="{ blink: timerFinished }" id="timerDisplay" v-else key="display">{{ displayRemaining }}</h1>
@@ -27,7 +27,7 @@
 
     <div>
       <button class="btn btn-lg" :class="toggleTimerClass" @click="toggleTimer">{{ toggleTimerText }}</button>
-      <button class="btn btn-lg btn-danger" :disabled="!timerActive" @click="resetTimer">Reset</button>
+      <button class="btn btn-lg btn-danger" :disabled="!timerActive" @click="resetTimer">{{ timerButtonText.reset }}</button>
     </div>
 
   </div>
@@ -42,6 +42,16 @@ var stopwatch = require('timer-stopwatch');
 export default {
   data: function () {
     return {
+      // text
+      timerTitleText: 'Set a timer',
+      timerButtonText: {
+        start: 'Start',
+        pause: 'Pause',
+        resume: 'Resume',
+        reset: 'Reset',
+      },
+
+      // other variables
       timerObject: null,
       timerSound: null,
       timerDuration: 0,
@@ -72,7 +82,7 @@ export default {
     },
     toggleTimerText: function() {
       return !(this.timerActive || this.timerPaused) 
-        ? 'Start' : this.timerPaused ? 'Resume' : 'Pause';
+        ? this.timerButtonText.start : this.timerPaused ? this.timerButtonText.resume : this.timerButtonText.pause;
     },
     toggleTimerClass: function() {
       return !(this.timerActive || this.timerPaused) 
