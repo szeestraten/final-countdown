@@ -4,8 +4,11 @@
       <!-- Display title-->
       <h1 v-if="!timerActive" key="title">{{ timerTitleText }}</h1>
 
+      <!-- Display 1 minute warning -->
+      <h1 v-else-if="oneMinuteWarning" :class="{ blink: oneMinuteWarning}" id="timerOneMinuteWarning" class="text-danger" key="oneMinuteWarning">{{ timerOneMinuteWarningText }}</h1>
+
       <!-- Display timer -->
-      <h1 :class="{ blink: timerFinished }" id="timerDisplay" v-else key="display">{{ displayRemaining }}</h1>
+      <h1 v-else :class="{ blink: timerFinished }" id="timerDisplay" key="display">{{ displayRemaining }}</h1>
     </transition>
 
     <transition name="fade" mode="out-in">
@@ -44,6 +47,7 @@ export default {
     return {
       // text
       timerTitleText: 'Set a timer',
+      timerOneMinuteWarningText: '1 minute left!',
       timerButtonText: {
         start: 'Start',
         pause: 'Pause',
@@ -77,6 +81,10 @@ export default {
   computed: {
     displayRemaining: function () {
       return numeral(this.getTimeInSeconds()).format('00:00:00');
+    },
+    oneMinuteWarning: function () {
+      // Return true for 5 seconds at 1 minute warning
+      return (this.getTimeInSeconds() >= 56 && this.getTimeInSeconds() <= 60);
     },
     calculateProgress: function () {
       return numeral(this.getTimeInSeconds() / this.timerDuration).format('0%');
@@ -113,13 +121,16 @@ export default {
         this.timerDuration = numeral(this.timerSelected).value();
 
         // Setup stopwatch object
-        this.timerObject = new stopwatch(this.timerDuration * 1000, { refreshRateMS: 1000 });
+        this.timerObject = new stopwatch(this.timerDuration * 1000, { refreshRateMS: 1000, almostDoneMS: 60000 });
         // Need this for closures
         var self = this;
         // Call when done
         this.timerObject.onDone(function() {
           self.timerFinished = true;
           self.timerSound.play();
+        });
+        // Call on 1 minute warning
+        this.timerObject.onAlmostDone(function() {
         });
 
         // Start the clock
@@ -195,7 +206,7 @@ export default {
   mounted: function () {
     // Load audio for alarm sound
     this.timerSound = new Audio('assets/media/bell.mp3');
-    this.timerSound.volume = 0.3;
+    this.timerSound.volume = 0.4;
   },
 }
 </script>
