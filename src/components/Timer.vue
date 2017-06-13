@@ -38,9 +38,9 @@
 
 <script>
 // Import numeral for handling time formats
-var numeral = require('numeral');
+var numeral = require('numeral')
 // Import timer-stopwatch for timing
-var stopwatch = require('timer-stopwatch');
+var stopwatch = require('timer-stopwatch')
 
 export default {
   data: function () {
@@ -80,133 +80,133 @@ export default {
   },
   computed: {
     displayRemaining: function () {
-      return numeral(this.getTimeInSeconds()).format('00:00:00');
+      return numeral(this.getTimeInSeconds()).format('00:00:00')
     },
     oneMinuteWarning: function () {
       // Return true for 5 seconds at 1 minute warning
-      return (this.getTimeInSeconds() >= 56 && this.getTimeInSeconds() <= 60);
+      return (this.getTimeInSeconds() >= 56 && this.getTimeInSeconds() <= 60)
     },
     calculateProgress: function () {
-      return numeral(this.getTimeInSeconds() / this.timerDuration).format('0%');
+      return numeral(this.getTimeInSeconds() / this.timerDuration).format('0%')
     },
     toggleTimerText: function() {
       return !(this.timerActive || this.timerPaused) 
-        ? this.timerButtonText.start : this.timerPaused ? this.timerButtonText.resume : this.timerButtonText.pause;
+        ? this.timerButtonText.start : this.timerPaused ? this.timerButtonText.resume : this.timerButtonText.pause
     },
     toggleTimerClass: function() {
       return !(this.timerActive || this.timerPaused) 
-        ? 'btn-success' : this.timerPaused ? 'btn-warning' : 'btn-info';
+        ? 'btn-success' : this.timerPaused ? 'btn-warning' : 'btn-info'
     },
 
   },
   methods: {
     toggleTimer: function() {
       if(this.timerPaused || !this.timerActive) {
-        this.startTimer();
+        this.startTimer()
       } else {
-        this.pauseTimer();
+        this.pauseTimer()
       }
     },
     startTimer: function () {
       // Resume timer if paused
       if (this.timerPaused) {
         // Start paused timer
-        this.timerPaused = false;
+        this.timerPaused = false
         this.timerObject.start()
-        this.preventSleep();
+        this.preventSleep()
 
       // If not paused, setup new timer
       } else {
         // Get the selected duration
-        this.timerDuration = numeral(this.timerSelected).value();
+        this.timerDuration = numeral(this.timerSelected).value()
 
         // Setup stopwatch object
-        this.timerObject = new stopwatch(this.timerDuration * 1000, { refreshRateMS: 1000, almostDoneMS: 60000 });
+        this.timerObject = new stopwatch(this.timerDuration * 1000, { refreshRateMS: 1000, almostDoneMS: 60000 })
         // Need this for closures
-        var self = this;
+        var self = this
         // Call when done
         this.timerObject.onDone(function() {
-          self.timerFinished = true;
-          self.timerSound.play();
-        });
+          self.timerFinished = true
+          self.timerSound.play()
+        })
         // Call on 1 minute warning
         this.timerObject.onAlmostDone(function() {
-        });
+        })
 
         // Start the clock
-        this.timerObject.start();
-        this.timerActive = true;
+        this.timerObject.start()
+        this.timerActive = true
       
         // Prevent sleep when counting down
-        this.preventSleep();
+        this.preventSleep()
       }
     },
     pauseTimer: function () {
-      this.timerPaused = true;
-      this.timerObject.stop();
+      this.timerPaused = true
+      this.timerObject.stop()
 
       // Disable sleep prevention
-      this.allowSleep();
+      this.allowSleep()
     },
     resetTimer: function () {
       // Reset timers and variables
-      this.timerActive = false;
-      this.timerPaused = false;
-      this.timerFinished = false;
-      this.timerObject.stop();
-      this.timerObject = null;
+      this.timerActive = false
+      this.timerPaused = false
+      this.timerFinished = false
+      this.timerObject.stop()
+      this.timerObject = null
 
       // Disable sleep prevention
-      this.allowSleep();
+      this.allowSleep()
     },
 
     // Helper functions
     getTimeInSeconds: function () {
-      return Math.round(this.timerObject.ms/1000);
+      return Math.round(this.timerObject.ms/1000)
     },
     getTimeInMilliseconds: function () {
-      return Math.round(this.timerObject.ms);
+      return Math.round(this.timerObject.ms)
     },
     
     // Avoid sleep hack when timer is active
     preventSleep: function() {
-      if (!this.sleepVideo) this._initSleepPrevention();
-      this.sleepVideo.setAttribute('loop', 'loop');
-      this.sleepVideo.play();
+      if (!this.sleepVideo) this._initSleepPrevention()
+      this.sleepVideo.setAttribute('loop', 'loop')
+      this.sleepVideo.play()
     },
     allowSleep: function() {
-      if (!this.sleepVideo) this._initSleepPrevention();
-      this.sleepVideo.removeAttribute('loop');
-      this.sleepVideo.pause();
+      if (!this.sleepVideo) this._initSleepPrevention()
+      this.sleepVideo.removeAttribute('loop')
+      this.sleepVideo.pause()
     },
     _initSleepPrevention: function() {
       // Setup video element
-      this.sleepVideo = window.document.createElement('video');
-      this.sleepVideo.setAttribute('width', '10');
-      this.sleepVideo.setAttribute('height', '10');
-      this.sleepVideo.style.position = 'absolute';
-      this.sleepVideo.style.top = '-10px';
-      this.sleepVideo.style.left = '-10px';
+      this.sleepVideo = window.document.createElement('video')
+      this.sleepVideo.setAttribute('width', '10')
+      this.sleepVideo.setAttribute('height', '10')
+      this.sleepVideo.style.position = 'absolute'
+      this.sleepVideo.style.top = '-10px'
+      this.sleepVideo.style.left = '-10px'
 
       // Create video source elements
-      var source_mp4 = window.document.createElement('source');
-      source_mp4.setAttribute('src', 'assets/media/muted-blank.mp4');
-      source_mp4.setAttribute('type', 'video/mp4');
-      this.sleepVideo.appendChild(source_mp4);
+      var source_mp4 = window.document.createElement('source')
+      source_mp4.setAttribute('src', 'assets/media/muted-blank.mp4')
+      source_mp4.setAttribute('type', 'video/mp4')
+      this.sleepVideo.appendChild(source_mp4)
 
-      var source_ogg = window.document.createElement('source');
-      source_ogg.setAttribute('src', 'assets/media/muted-blank.ogv');
-      source_ogg.setAttribute('type', 'video/ogg');
-      this.sleepVideo.appendChild(source_ogg);
+      var source_ogg = window.document.createElement('source')
+      source_ogg.setAttribute('src', 'assets/media/muted-blank.ogv')
+      source_ogg.setAttribute('type', 'video/ogg')
+      this.sleepVideo.appendChild(source_ogg)
 
       // Add elements to DOM
-      window.document.body.appendChild(this.sleepVideo);
+      window.document.body.appendChild(this.sleepVideo)
     },
   },
   mounted: function () {
     // Load audio for alarm sound
-    this.timerSound = new Audio('assets/media/bell.mp3');
-    this.timerSound.volume = 0.4;
+    this.timerSound = new Audio('assets/media/bell.mp3')
+    this.timerSound.volume = 0.4
   },
 }
 </script>
