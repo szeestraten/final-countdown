@@ -12,7 +12,7 @@ import VueAnalytics from 'vue-analytics'
 
 // Enable Vue plugins
 // Router
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 // Google Analytics
 Vue.use(VueAnalytics, {
   id: 'UA-1921051-7',

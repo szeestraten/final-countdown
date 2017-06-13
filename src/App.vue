@@ -3,8 +3,8 @@
     <div class="site-wrapper-inner">
       <div class="cover-container">
 
-        <div class="cover inner">
-          <div class="wrapper">
+        <div class="inner cover">
+          <div>
             <transition name="fade" mode="out-in">
               <router-view></router-view>
             </transition>
