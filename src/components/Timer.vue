@@ -2,13 +2,20 @@
   <div>
     <transition name="fade" mode="out-in">
       <!-- Display title-->
-      <h1 v-if="!timerActive" key="title">{{ timerTitleText }}</h1>
+      <h1 v-if="!timerActive" key="title">{{ $t('timer.title') }}</h1>
 
       <!-- Display 1 minute warning -->
-      <h1 v-else-if="oneMinuteWarning" :class="{ blink: oneMinuteWarning}" id="timerOneMinuteWarning" class="text-danger" key="oneMinuteWarning">{{ timerOneMinuteWarningText }}</h1>
+      <h1 v-else-if="oneMinuteWarning"
+        :class="{ blink: oneMinuteWarning}"
+        id="timerOneMinuteWarning"
+        class="text-danger"
+        key="oneMinuteWarning">{{ $t('timer.oneMinuteWarning') }}</h1>
 
       <!-- Display timer -->
-      <h1 v-else :class="{ blink: timerFinished }" id="timerDisplay" key="display">{{ displayRemaining }}</h1>
+      <h1 v-else
+        :class="{ blink: timerFinished }"
+        id="timerDisplay"
+        key="display">{{ displayRemaining }}</h1>
     </transition>
 
     <transition name="fade" mode="out-in">
@@ -30,7 +37,7 @@
 
     <div>
       <button class="btn btn-lg" :class="toggleTimerClass" @click="toggleTimer">{{ toggleTimerText }}</button>
-      <button class="btn btn-lg btn-danger" :disabled="!timerActive" @click="resetTimer">{{ timerButtonText.reset }}</button>
+      <button class="btn btn-lg btn-danger" :disabled="!timerActive" @click="resetTimer">{{ $t('timer.button.reset') }}</button>
     </div>
 
   </div>
@@ -45,17 +52,6 @@ var stopwatch = require('timer-stopwatch')
 export default {
   data: function () {
     return {
-      // text
-      timerTitleText: 'Set a timer',
-      timerOneMinuteWarningText: '1 minute left!',
-      timerButtonText: {
-        start: 'Start',
-        pause: 'Pause',
-        resume: 'Resume',
-        reset: 'Reset',
-      },
-
-      // other variables
       sleepVideo: null,
       timerObject: null,
       timerSound: null,
@@ -65,16 +61,16 @@ export default {
       timerFinished: false,
       timerSelected: '15:00',
       options: [
-        { text: '5m', value: '5:00'},
-        { text: '10m', value: '10:00'},
-        { text: '15m', value: '15:00'},
-        { text: '20m', value: '20:00'},
-        { text: '25m', value: '25:00'},
-        { text: '30m', value: '30:00'},
-        { text: '35m', value: '35:00'},
-        { text: '40m', value: '40:00'},
-        { text: '45m', value: '45:00'}
-      ],
+        { text: '5m', value: '5:00' },
+        { text: '10m', value: '10:00' },
+        { text: '15m', value: '15:00' },
+        { text: '20m', value: '20:00' },
+        { text: '25m', value: '25:00' },
+        { text: '30m', value: '30:00' },
+        { text: '35m', value: '35:00' },
+        { text: '40m', value: '40:00' },
+        { text: '45m', value: '45:00' }
+      ]
 
     }
   },
@@ -89,19 +85,19 @@ export default {
     calculateProgress: function () {
       return numeral(this.getTimeInSeconds() / this.timerDuration).format('0%')
     },
-    toggleTimerText: function() {
-      return !(this.timerActive || this.timerPaused) 
-        ? this.timerButtonText.start : this.timerPaused ? this.timerButtonText.resume : this.timerButtonText.pause
+    toggleTimerText: function () {
+      return !(this.timerActive || this.timerPaused)
+        ? this.$t('timer.button.start') : this.timerPaused ? this.$t('timer.button.resume') : this.$t('timer.button.pause')
     },
-    toggleTimerClass: function() {
-      return !(this.timerActive || this.timerPaused) 
+    toggleTimerClass: function () {
+      return !(this.timerActive || this.timerPaused)
         ? 'btn-success' : this.timerPaused ? 'btn-warning' : 'btn-info'
-    },
+    }
 
   },
   methods: {
-    toggleTimer: function() {
-      if(this.timerPaused || !this.timerActive) {
+    toggleTimer: function () {
+      if (this.timerPaused || !this.timerActive) {
         this.startTimer()
       } else {
         this.pauseTimer()
@@ -125,18 +121,18 @@ export default {
         // Need this for closures
         var self = this
         // Call when done
-        this.timerObject.onDone(function() {
+        this.timerObject.onDone(function () {
           self.timerFinished = true
           self.timerSound.play()
         })
         // Call on 1 minute warning
-        this.timerObject.onAlmostDone(function() {
+        this.timerObject.onAlmostDone(function () {
         })
 
         // Start the clock
         this.timerObject.start()
         this.timerActive = true
-      
+
         // Prevent sleep when counting down
         this.preventSleep()
       }
@@ -162,24 +158,24 @@ export default {
 
     // Helper functions
     getTimeInSeconds: function () {
-      return Math.round(this.timerObject.ms/1000)
+      return Math.round(this.timerObject.ms / 1000)
     },
     getTimeInMilliseconds: function () {
       return Math.round(this.timerObject.ms)
     },
-    
+
     // Avoid sleep hack when timer is active
-    preventSleep: function() {
+    preventSleep: function () {
       if (!this.sleepVideo) this._initSleepPrevention()
       this.sleepVideo.setAttribute('loop', 'loop')
       this.sleepVideo.play()
     },
-    allowSleep: function() {
+    allowSleep: function () {
       if (!this.sleepVideo) this._initSleepPrevention()
       this.sleepVideo.removeAttribute('loop')
       this.sleepVideo.pause()
     },
-    _initSleepPrevention: function() {
+    _initSleepPrevention: function () {
       // Setup video element
       this.sleepVideo = window.document.createElement('video')
       this.sleepVideo.setAttribute('width', '10')
@@ -189,24 +185,24 @@ export default {
       this.sleepVideo.style.left = '-10px'
 
       // Create video source elements
-      var source_mp4 = window.document.createElement('source')
-      source_mp4.setAttribute('src', 'assets/media/muted-blank.mp4')
-      source_mp4.setAttribute('type', 'video/mp4')
-      this.sleepVideo.appendChild(source_mp4)
+      var sourceMp4 = window.document.createElement('source')
+      sourceMp4.setAttribute('src', 'assets/media/muted-blank.mp4')
+      sourceMp4.setAttribute('type', 'video/mp4')
+      this.sleepVideo.appendChild(sourceMp4)
 
-      var source_ogg = window.document.createElement('source')
-      source_ogg.setAttribute('src', 'assets/media/muted-blank.ogv')
-      source_ogg.setAttribute('type', 'video/ogg')
-      this.sleepVideo.appendChild(source_ogg)
+      var sourceOgg = window.document.createElement('source')
+      sourceOgg.setAttribute('src', 'assets/media/muted-blank.ogv')
+      sourceOgg.setAttribute('type', 'video/ogg')
+      this.sleepVideo.appendChild(sourceOgg)
 
       // Add elements to DOM
       window.document.body.appendChild(this.sleepVideo)
-    },
+    }
   },
   mounted: function () {
     // Load audio for alarm sound
     this.timerSound = new Audio('assets/media/bell.mp3')
     this.timerSound.volume = 0.4
-  },
+  }
 }
 </script>

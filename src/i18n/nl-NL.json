@@ -1,0 +1,23 @@
+{
+  "locales": {
+    "en-US": "en",
+    "nl-NL": "nl",
+    "language": "Taal"
+  },
+  "home": {
+    "title": "Ook helemaal klaar met rommelige, langdradige meetings?",
+    "lead": "Time management in vergaderingen is vaak lastig. <br>Hou je meetings in de tang met een timer!",
+    "button": "Stel een timer in"
+  },
+  "timer": {
+    "title": "Stel een timer in",
+    "oneMinuteWarning": "1 minute left!",
+    "button": {
+      "start": "Begin",
+      "pause": "Pauze",
+      "resume": "Hervatten",
+      "reset": "Reset"
+    }
+  },
+  "footer": "Gemaakt met <a href='https://vuejs.org'>Vue.js</a>, door <a href='https://github.com/szeestraten'>@szeestraten</a>."
+}

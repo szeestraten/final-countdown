@@ -1,0 +1,23 @@
+{
+  "locales": {
+    "en-US": "en",
+    "nl-NL": "nl",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Tired of long meetings?",
+    "lead": "Time management can be hard, especially during meetings. <br>Keep your meetings efficient with a timer.",
+    "button": "Set a timer"
+  },
+  "timer": {
+    "title": "Set a timer",
+    "oneMinuteWarning": "1 minute left!",
+    "button": {
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "reset": "Reset"
+    }
+  },
+  "footer": "Created with <a href='https://vuejs.org'>Vue.js</a>, by <a href='https://github.com/szeestraten'>@szeestraten</a>."
+}
