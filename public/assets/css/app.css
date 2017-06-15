@@ -32,6 +32,14 @@ h1 {
   font-weight: bold;
 }
 
+.locale {
+  margin-right: 5px;
+}
+
+.active {
+  text-decoration-line: underline;
+}
+
 #timerDisplay {
   /* Hack for making progressbar and buttons not move on switch */
   margin-top: 50px;

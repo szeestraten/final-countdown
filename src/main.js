@@ -1,32 +1,27 @@
 // import Vue stuff
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
 
 // Import app specific stuff
 import App from './App.vue'
-import { routes } from './routes'
-import store from './store/store'
+import { createRouter } from './router'
+import { createStore } from './store'
+import { createI18n } from './i18n'
 
-// Import 3rd party libs
-import VueAnalytics from 'vue-analytics'
+const router = createRouter()
+const store = createStore()
+const i18n = createI18n()
 
-// Enable Vue plugins
-// Router
-Vue.use(VueRouter)
 // Google Analytics
 Vue.use(VueAnalytics, {
   id: 'UA-1921051-7',
   router
 })
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
-
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

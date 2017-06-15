@@ -11,7 +11,14 @@
           </div>
 
           <div class="footer inner">
-            <p>{{ appFooterVueText }} <a :href="appFooterVueLink">Vue.js</a>, {{ appFooterProjectText }} <a :href="appFooterProjectLink">@szeestraten</a>.</p>
+            <p>
+              <span v-html="$t('footer')"></span>
+              {{ $t('locales.language') }}:
+              <a class="locale" href="javascript:void(0);"
+                v-for="locale in locales"
+                :class="{ active: $i18n.locale === locale }"
+                @click="$i18n.locale = locale">{{ $t('locales.' + locale) }}</a>
+            </p>
           </div>
         </div>
 
@@ -24,11 +31,7 @@
 export default {
   data: function () {
     return {
-      // text
-      appFooterVueText: 'Created with',
-      appFooterVueLink: 'https://vuejs.org',
-      appFooterProjectLink: 'https://github.com/szeestraten',
-      appFooterProjectText: 'by',
+      locales: ['en-US', 'nl-NL']
     }
   }
 }
