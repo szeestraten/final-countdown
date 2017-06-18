@@ -1,6 +1,7 @@
 // import Vue stuff
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
+import VueLocaleStorage from 'vue-ls'
 
 // Import app specific stuff
 import App from './App.vue'
@@ -18,10 +19,13 @@ Vue.use(VueAnalytics, {
   router
 })
 
+// Vue LocalStorage
+Vue.use(VueLocaleStorage, { namespace: 'vuejs__' })
+
 const app = new Vue({
   el: '#app',
   router,
   store,
   i18n,
   render: h => h(App)
-})
+}) // eslint-disable-line
