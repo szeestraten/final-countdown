@@ -38,13 +38,17 @@ export default {
   mounted: function () {
     // Set locale if set in local storage
     var locale = this.$ls.get('locale')
-    if (locale) this.setLocale(locale)
+    if (locale) { this.setLocale(locale) }
   },
   methods: {
     // Set locale of current session in Vue and in local storage
     setLocale: function (locale) {
+      // Set i18n locale
       this.$i18n.locale = locale
+      // Set local storage cookie
       this.$ls.set('locale', locale)
+      // Change title
+      document.title = this.$t('head.title')
     },
     // Returns an dict to render if the checked locale is active
     isLocaleActive: function (locale) {

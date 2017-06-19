@@ -4,6 +4,9 @@
     "nl-NL": "nl",
     "language": "Language"
   },
+  "head": {
+    "title": "Time management for meetings"
+  },
   "home": {
     "title": "Tired of long meetings?",
     "lead": "Time management can be hard, especially during meetings. <br>Keep your meetings efficient with a timer.",
