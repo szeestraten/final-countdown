@@ -12,7 +12,7 @@ deploy:
   message: "${TRAVIS_COMMIT}"
   token:
     secure: "147xgF6qX1Le5GLw6q2dax3fHOEwlKXzfd58FwzAcgBtG0Q5j1Yrf59YW5wXvp5LmxicohiwyNSMMMSA7n2tl6Ov8iEfHIn++1AQP4mPzpM70x71XUX+IZ4OLa0MxySeA6bXmIU/VIlqOMI+wTEfh/Scjamw9pVhPKjCqWCcrljfXpQtlcfdQIRG1wmjfdfkGuA/cuF7H7k9uGmxP2lwxJj+RRnXonn7CugMzXBx287G4P02UOP0CSaWw62QHTjNwk9jGNyfWbmBe9IqL5L+Ka2wJ5pWiSpX1TWVMhr+3jrR6l0B3RQCorvta+FeKSZKcbCudNnnnS/1pOTKo98uP9pw6Unv4fM+2AJNFtA8+A6Tb0eY7JT3Ffyaww+XJl/IiJYH9Gxntx39DNnSUy1wfqsyX8KnA+8l1WU330AqT27V2eHEi5+lgEtTHJECyEoMXX+UbnZJ9jYPXAfUAxDWOLPgtdDGAl5zNEB5+DM0C+QiARE73dPBc1Bof8fcJVCaA7eN/edxag3+e946qmhUqaleahghZAQBooSZqNNRMxMKWrEHq51YMhlzDqXahQ/8OLb9ccQycYff8tLDE5fDC0D7mdDiTA9vmilljXZUZlfP4Ur6Sq2TeqgPnTFMPjwpxjmE9g7XFPU41pWWeH4iILdE3dwvBv+88SYLlMgF4yg="
-  project: "final-countdown-prd"
+  #project: "final-countdown-prd"
   on:
     branch: master
   skip_cleanup: true
